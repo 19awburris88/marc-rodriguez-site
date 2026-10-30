@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Proposed palette from the brief — not an official Manifest
+ * brand standard. Contrast (WCAG): ink/ivory 16.7, bronze/ink 7.0,
+ * muted/ink 9.3, bronze-deep/ivory 6.0, stone/ivory 6.1.
+ * Never use --color-bronze for text on ivory (2.4:1).
+ */
+@theme {
+  --color-ink: #111111;
+  --color-ink-soft: #1a1a1a;
+  --color-ivory: #f4f1ea;
+  --color-ivory-deep: #eae5da;
+  --color-bronze: #b89a63;
+  --color-bronze-deep: #6e5830;
+  --color-muted: #b8b6b0;
+  --color-stone: #5c5a55;
+  --color-divider: #d8d2c7;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 3px;
+}
+
+.on-light :focus-visible {
+  outline-color: var(--color-bronze-deep);
+}
+
+/* Anchored sections clear the sticky header. */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Gentle entrance, only when motion is welcome. Content is visible without it. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .rise-delay-1 {
+    animation-delay: 90ms;
+  }
+  .rise-delay-2 {
+    animation-delay: 180ms;
+  }
+  .rise-delay-3 {
+    animation-delay: 270ms;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
