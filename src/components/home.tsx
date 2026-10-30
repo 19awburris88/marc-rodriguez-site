@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { person } from "@/content/person";
-import { storyPreview } from "@/content/biography";
-import { speakingIntro, topics } from "@/content/topics";
+import { chapters, interviewQuestions, philosophy, shortBio, storyPreview } from "@/content/biography";
+import { speakerReel, speakerSheet, speakingIntro, topics } from "@/content/topics";
 import { ventures } from "@/content/ventures";
 import { media, testimonials } from "@/content/media";
 import { canShow, visible } from "@/lib/content";
+import { siteConfig } from "@/lib/config";
 import { withUtm } from "@/lib/links";
-import { Draft } from "./Draft";
+import { ContactForm } from "./ContactForm";
+import { Draft, DraftLabel } from "./Draft";
 import { HeroVideo } from "./HeroVideo";
 import { Photo } from "./Photo";
 import { TrackedLink } from "./TrackedLink";
-import { ArrowRight, Container, Eyebrow, ExternalIcon, NewTab, SpeakingCta, buttonStyles } from "./ui";
+import { Container, Eyebrow, ExternalIcon, NewTab, SpeakingCta, buttonStyles } from "./ui";
 
 export function Hero() {
   const { hero, heroVideo } = person;
@@ -51,7 +53,7 @@ export function Hero() {
           </Draft>
           <div className="rise rise-delay-3 mt-10 flex flex-col gap-3 sm:flex-row">
             <SpeakingCta location="hero" />
-            <Link href="/about" className={buttonStyles.outlineDark}>
+            <Link href="#about" className={buttonStyles.outlineDark}>
               Meet Marc
             </Link>
           </div>
@@ -80,39 +82,83 @@ export function RoleStrip() {
   );
 }
 
-export function StoryPreview() {
-  if (!canShow(storyPreview)) return null;
+export function About() {
+  const shownChapters = visible(chapters);
   return (
-    <section className="on-light bg-marble py-20 lg:py-28">
-      <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <Photo
-          image={person.candid.src ? person.candid : person.portrait}
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className={person.candid.src ? "aspect-[4/3] w-full" : "mx-auto aspect-[4/5] w-full max-w-md lg:max-w-none"}
-        />
-        <div>
-          <Eyebrow>His story</Eyebrow>
-          <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">{storyPreview.heading}</h2>
-          <Draft item={storyPreview} className="mt-8">
-            <p className="mt-6 text-lg leading-relaxed text-steel">{storyPreview.text}</p>
-          </Draft>
-          <Link
-            href="/about"
-            className="mt-8 inline-flex items-center gap-2 border-b border-iron pb-1 text-sm font-semibold"
-          >
-            Read his story <ArrowRight />
-          </Link>
+    <section id="about" className="on-light bg-marble py-20 lg:py-28">
+      <Container>
+        <div className="grid items-center gap-12 lg:grid-cols-[5fr_7fr] lg:gap-20">
+          <Photo
+            image={person.candid.src ? person.candid : person.portrait}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className={person.candid.src ? "aspect-[4/3] w-full" : "mx-auto aspect-[4/5] w-full max-w-md lg:max-w-none"}
+          />
+          <div>
+            <Eyebrow>About</Eyebrow>
+            <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl">{storyPreview.heading}</h2>
+            <Draft item={shortBio} className="mt-10">
+              <p className="mt-8 font-display text-xl leading-snug text-iron sm:text-2xl">{shortBio.text}</p>
+            </Draft>
+            <Draft item={storyPreview} className="mt-10">
+              <p className="mt-6 text-lg leading-relaxed text-steel">{storyPreview.text}</p>
+            </Draft>
+          </div>
         </div>
+
+        {shownChapters.length > 0 && (
+          <ol className="mt-20 grid gap-12 border-t border-travertine pt-12 md:grid-cols-3 md:gap-8">
+            {shownChapters.map((c, i) => (
+              <li key={c.id}>
+                <span className="font-display text-3xl text-red">0{i + 1}</span>
+                <Draft item={c} className="mt-6">
+                  <h3 className="mt-4 font-display text-2xl">{c.title}</h3>
+                  <p className="mt-3 leading-relaxed text-steel">{c.body}</p>
+                </Draft>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        <Philosophy />
       </Container>
     </section>
   );
 }
 
-export function SpeakingPreview() {
-  const shown = visible(topics);
-  if (!shown.length) return null;
+/** Leadership philosophy in Marc's own words. Preview shows what is still needed; production omits it. */
+function Philosophy() {
+  if (canShow(philosophy)) {
+    return (
+      <div className="mt-20 max-w-3xl">
+        <Eyebrow>Leadership philosophy</Eyebrow>
+        <Draft item={philosophy} className="mt-8">
+          <p className="mt-6 font-display text-3xl leading-snug">{philosophy.text}</p>
+        </Draft>
+      </div>
+    );
+  }
+  if (!siteConfig.isPreview) return null;
   return (
-    <section className="bg-iron py-20 text-marble lg:py-28">
+    <div className="relative mt-20 border border-dashed border-red/40 bg-limestone/60 p-8">
+      <DraftLabel text="Pending client interview" />
+      <Eyebrow>Leadership philosophy</Eyebrow>
+      <p className="mt-4 text-steel">
+        This space will hold Marc&rsquo;s philosophy in his own words, along with a fuller 250–400 word biography.
+        Questions to cover:
+      </p>
+      <ul className="mt-4 list-disc space-y-1 pl-5 text-steel">
+        {interviewQuestions.map((q) => (
+          <li key={q}>{q}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function Speaking() {
+  const shown = visible(topics);
+  return (
+    <section id="speaking" className="bg-iron py-20 text-marble lg:py-28">
       <Container>
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
@@ -123,32 +169,56 @@ export function SpeakingPreview() {
             <p className="text-lg leading-relaxed text-stone-soft">{speakingIntro.text}</p>
           </Draft>
         </div>
-        <ol className="mt-14 border-t border-white/15">
-          {shown.map((topic, i) => (
-            <li key={topic.id} className="border-b border-white/15">
-              <Draft item={topic} tone="dark" className="my-6">
-                <Link
-                  href={`/speaking#${topic.id}`}
-                  className="group grid gap-2 py-8 sm:grid-cols-[4rem_1fr_auto] sm:items-baseline sm:gap-6"
-                >
-                  <span className="font-sans text-sm text-bronze tabular-nums">0{i + 1}</span>
-                  <span>
-                    <span className="block font-display text-2xl sm:text-3xl group-hover:text-bronze">
-                      {topic.title}
-                    </span>
-                    <span className="mt-2 block max-w-2xl text-stone-soft">{topic.short}</span>
-                  </span>
-                  <ArrowRight className="hidden text-bronze transition-transform group-hover:translate-x-1 sm:block" />
-                </Link>
-              </Draft>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <SpeakingCta location="home_speaking" />
-          <Link href="/speaking" className={buttonStyles.outlineDark}>
-            Speaking details
-          </Link>
+
+        {speakerReel && (
+          <div className="mt-12 flex flex-wrap items-center gap-4">
+            <a href={speakerReel.url} target="_blank" rel="noopener noreferrer" className={buttonStyles.outlineDark}>
+              Watch the speaker reel
+              <NewTab />
+            </a>
+            {speakerReel.transcriptUrl && (
+              <a href={speakerReel.transcriptUrl} className="text-sm underline underline-offset-4">
+                Read transcript
+              </a>
+            )}
+          </div>
+        )}
+
+        {shown.length > 0 && (
+          <ol className="mt-14 border-t border-white/15">
+            {shown.map((t, i) => (
+              <li key={t.id} id={t.id} className="border-b border-white/15">
+                <Draft item={t} tone="dark" className="my-6">
+                  <div className="grid gap-6 py-10 lg:grid-cols-[4rem_1.3fr_1fr] lg:gap-10">
+                    <span className="font-sans text-sm text-bronze tabular-nums">0{i + 1}</span>
+                    <div>
+                      <h3 className="font-display text-2xl sm:text-3xl">{t.title}</h3>
+                      <p className="mt-3 max-w-xl text-stone-soft">{t.short}</p>
+                    </div>
+                    <dl className="space-y-4 text-sm">
+                      <div>
+                        <dt className="font-semibold tracking-[0.14em] text-bronze uppercase">For</dt>
+                        <dd className="mt-1 text-base text-marble">{t.audience}</dd>
+                      </div>
+                      <div>
+                        <dt className="font-semibold tracking-[0.14em] text-bronze uppercase">Takeaway</dt>
+                        <dd className="mt-1 text-base text-marble">{t.takeaway}</dd>
+                      </div>
+                    </dl>
+                  </div>
+                </Draft>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <SpeakingCta location="speaking" />
+          {speakerSheet && (
+            <a href={speakerSheet.href} download className={buttonStyles.outlineDark}>
+              {speakerSheet.label}
+            </a>
+          )}
         </div>
       </Container>
     </section>
@@ -237,20 +307,101 @@ export function Proof() {
   );
 }
 
-export function ClosingCta() {
+export function Contact() {
+  const instagram = person.social.instagram;
+  const email = canShow(person.publicEmail) ? person.publicEmail : undefined;
+
+  const fallback = email ? (
+    <p>
+      You can also email{" "}
+      <a href={`mailto:${email.address}`} className="underline">
+        {email.address}
+      </a>
+      .
+    </p>
+  ) : (
+    <p>
+      You can also reach Marc on{" "}
+      <a href={instagram.url} target="_blank" rel="noopener noreferrer" className="underline">
+        Instagram
+        <NewTab />
+      </a>
+      .
+    </p>
+  );
+
   return (
-    <section className="bg-charcoal py-20 text-marble lg:py-28">
-      <Container className="max-w-3xl text-center">
-        <h2 className="font-display text-4xl leading-tight sm:text-6xl">Let&rsquo;s start a conversation.</h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-stone-soft">
-          Planning an event, recording a show, or exploring a collaboration? Reach out and tell Marc what you have in
-          mind.
+    <section id="contact" className="on-light bg-limestone py-20 lg:py-28">
+      <Container>
+        <Eyebrow>Contact</Eyebrow>
+        <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight sm:text-6xl">
+          Let&rsquo;s start a conversation.
+        </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-steel">
+          Planning an event, recording a show, or exploring a collaboration? Tell Marc what you have in mind.
         </p>
-        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link href="/contact" className={buttonStyles.primary}>
-            Connect With Marc
-          </Link>
-          <SpeakingCta location="closing" className={buttonStyles.outlineDark} />
+
+        <div className="mt-14 grid gap-16 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
+          <ContactForm fallback={fallback} />
+
+          <aside className="space-y-10 lg:border-l lg:border-travertine lg:pl-12">
+            <div>
+              <h3 className="font-display text-2xl">Looking for training or education?</h3>
+              <p className="mt-3 text-steel">
+                Course, enrollment, trainer, and facility questions are handled directly by each business.
+              </p>
+              <ul className="mt-6 space-y-4">
+                {visible(ventures).map((v) => (
+                  <li key={v.id}>
+                    <TrackedLink
+                      external
+                      href={withUtm(v.url, "contact")}
+                      className="group flex items-start justify-between gap-4 border border-travertine bg-white/60 p-4 transition-[border-color,transform] duration-150 hover:border-iron active:scale-[0.99]"
+                      event={{ name: "business_referral", props: { venture: v.id, location: "contact" } }}
+                    >
+                      <span>
+                        <span className="block font-semibold">{v.name}</span>
+                        <span className="text-sm text-steel">{new URL(v.url).hostname.replace(/^www\./, "")}</span>
+                      </span>
+                      <ExternalIcon className="mt-1 shrink-0" />
+                      <NewTab />
+                    </TrackedLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-display text-2xl">Elsewhere</h3>
+              <ul className="mt-4 space-y-2 text-steel">
+                {email && (
+                  <li>
+                    <a href={`mailto:${email.address}`} className="underline underline-offset-4 hover:text-iron">
+                      {email.address}
+                    </a>
+                  </li>
+                )}
+                <li>
+                  <a
+                    href={instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    className="underline underline-offset-4 hover:text-iron"
+                  >
+                    Instagram {instagram.handle}
+                    <NewTab />
+                  </a>
+                </li>
+              </ul>
+              <p className="mt-6 text-sm text-steel">
+                How inquiries are handled: see the{" "}
+                <Link href="/privacy" className="underline underline-offset-4">
+                  privacy notice
+                </Link>
+                .
+              </p>
+            </div>
+          </aside>
         </div>
       </Container>
     </section>

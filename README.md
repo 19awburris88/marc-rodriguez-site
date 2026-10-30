@@ -1,6 +1,6 @@
 # Marc Rodriguez — Personal Brand Site
 
-A personal website for **Marc Rodriguez**, founder and CEO of Manifest Fitness Institute and owner of Manifest Dallas. Its main job is to bring in speaking inquiries. Its secondary job is to send visitors on to the two Manifest businesses.
+A one-page personal website for **Marc Rodriguez**, founder and CEO of Manifest Fitness Institute and owner of Manifest Dallas. Its main job is to bring in speaking inquiries. Its secondary job is to send visitors on to the two Manifest businesses.
 
 The full product brief is in [docs/BRIEF.md](docs/BRIEF.md).
 
@@ -55,13 +55,18 @@ Missing photos show up in preview as labeled "Photo needed" frames that describe
 
 How-to guide for editing content: [docs/CONTENT_EDITING.md](docs/CONTENT_EDITING.md).
 
+## Page layout
+
+For now the site is a single page. The header links jump to sections: **About** (`#about`), **Speaking** (`#speaking`), **Manifest** (`#manifest`), and **Contact** (`#contact`). A scroll-spy highlights whichever section is on screen. Only the privacy notice and the 404 page are separate pages. If you want separate pages again later, the sections are self-contained components in `src/components/home.tsx`.
+
 ## Project structure
 
 ```
 src/
-  app/            routes: / about speaking contact privacy, 404, api/contact,
+  app/            routes: / (one page), privacy, 404, api/contact,
                   sitemap.ts, robots.ts, opengraph-image.tsx
-  components/     Header (mobile menu), Footer, home sections, ContactForm,
+  components/     Header (mobile menu, scroll-spy), Footer, home sections
+                  (Hero, RoleStrip, About, Speaking, Ventures, Proof, Contact), ContactForm,
                   Draft (approval wrapper), Photo (image or placeholder), ui
   content/        person, biography, topics, ventures, media, privacy, sources
   lib/            config, content visibility, validation, email adapter,
@@ -73,7 +78,7 @@ public/images/    approved photos and logos go here
 ## Contact form behavior
 
 - Fields: name, email, inquiry type (Speaking, Media or Podcast, Partnership, General), and message are required. Organization and website are optional. Event date and location appear only when Speaking is selected.
-- Links on the site to `/contact?type=speaking` open the form with Speaking already selected.
+- Links to `/?type=speaking#contact` (every "Inquire About Speaking" button) scroll to the form with Speaking already selected.
 - Validation runs in the browser and again on the server, using the same rules from `src/lib/validation.ts`. Errors are announced, and an error summary links to each problem field.
 - Spam and abuse controls: a hidden honeypot field, a same-origin check, a cap on request size, and a per-IP rate limit (5 requests per 10 minutes).
 - The form shows success **only** after Resend accepts the message. That confirms the provider took it, not that it reached the inbox. Test mode, a missing configuration, and provider failures each get their own message, and whatever the visitor typed stays in the form.

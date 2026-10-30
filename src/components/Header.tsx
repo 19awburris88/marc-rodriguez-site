@@ -8,16 +8,19 @@ import { track } from "@/lib/analytics";
 import { Container, buttonStyles } from "./ui";
 
 const nav = [
-  { href: "/about", label: "About" },
-  { href: "/speaking", label: "Speaking" },
+  { href: "/#about", label: "About" },
+  { href: "/#speaking", label: "Speaking" },
   { href: "/#manifest", label: "Manifest" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#contact", label: "Contact" },
 ];
+
+const sectionIds = nav.map((item) => item.href.slice(2));
 
 export function Header({ name }: { name: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [panelTop, setPanelTop] = useState(72);
+  const [section, setSection] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -61,13 +64,40 @@ export function Header({ name }: { name: string }) {
     };
   }, [open]);
 
+  // Scroll-spy: highlight the section occupying the middle of the viewport (home page only).
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const inBand = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) inBand.add(entry.target.id);
+          else inBand.delete(entry.target.id);
+        }
+        setSection(sectionIds.find((id) => inBand.has(id)) ?? null);
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  // Release the scroll lock before the hash jump so the page can actually scroll.
+  const closeMenu = () => {
+    document.body.style.overflow = "";
+    setOpen(false);
+  };
+
   const toggle = () => {
     // Anchor the panel to the header's current bottom edge (the preview banner may sit above it).
     if (!open && headerRef.current) setPanelTop(headerRef.current.getBoundingClientRect().bottom);
     setOpen((v) => !v);
   };
 
-  const isActive = (href: string) => !href.includes("#") && pathname === href;
+  const isActive = (href: string) => pathname === "/" && section === href.slice(2);
 
   return (
     <>
@@ -79,7 +109,7 @@ export function Header({ name }: { name: string }) {
           Skip to content
         </a>
         <Container className="flex h-[72px] items-center justify-between gap-6">
-          <Link href="/" className="font-display text-xl sm:text-2xl" onClick={() => setOpen(false)}>
+          <Link href="/" className="font-display text-xl sm:text-2xl" onClick={closeMenu}>
             {name}
           </Link>
 
@@ -89,7 +119,7 @@ export function Header({ name }: { name: string }) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
+                    aria-current={isActive(item.href) ? "true" : undefined}
                     className={`py-2 transition-colors duration-150 hover:text-marble ${
                       isActive(item.href)
                         ? "text-marble underline decoration-red decoration-2 underline-offset-8"
@@ -147,9 +177,9 @@ export function Header({ name }: { name: string }) {
                 <li key={item.href} className="border-b border-white/10">
                   <Link
                     href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
+                    aria-current={isActive(item.href) ? "true" : undefined}
                     className="block py-5 font-display text-3xl transition-colors active:text-stone-soft"
-                    onClick={() => setOpen(false)}
+                    onClick={closeMenu}
                   >
                     {item.label}
                   </Link>
@@ -161,7 +191,7 @@ export function Header({ name }: { name: string }) {
               className={`${buttonStyles.primary} mt-8 w-full`}
               onClick={() => {
                 track({ name: "speaking_cta_click", props: { location: "mobile_menu" } });
-                setOpen(false);
+                closeMenu();
               }}
             >
               Inquire About Speaking

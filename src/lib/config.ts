@@ -25,4 +25,5 @@ export const siteConfig = {
   },
 } as const;
 
-export const speakingHref = "/contact?type=speaking";
+/** Scrolls to the contact form with Speaking preselected (read by ContactForm). */
+export const speakingHref = "/?type=speaking#contact";

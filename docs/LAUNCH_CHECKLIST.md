@@ -28,9 +28,10 @@
 - [x] `npm run lint` passes
 - [x] `npm run build` passes in preview mode. All pages except `/api/contact` are statically prerendered.
 - [x] A production-mode build fails and lists every blocker
-- [x] Routes `/`, `/about`, `/speaking`, `/contact`, `/privacy`, `/sitemap.xml`, `/robots.txt`, and `/opengraph-image` return 200. Unknown routes return the 404 page.
+- [x] One-page layout: `/`, `/privacy`, `/sitemap.xml`, `/robots.txt`, and `/opengraph-image` return 200. Unknown routes (including the old `/about`) return the 404 page.
+- [x] Header links jump to the About, Speaking, Manifest, and Contact sections, and the scroll-spy highlights the section on screen. Mobile menu links close the menu and scroll to their section.
 - [x] No horizontal overflow at 360, 390, 768, or 1440px on any route
-- [x] The speaking CTA opens `/contact?type=speaking` with Speaking preselected and the event fields shown
+- [x] The speaking CTA (`/?type=speaking#contact`) scrolls to the form with Speaking preselected and the event fields shown
 - [x] Client validation shows an error summary that takes focus and links to each field
 - [x] Server validation returns field errors (400). Cross-origin requests get 403, non-JSON gets 415, and the honeypot is accepted quietly without sending.
 - [x] The rate limit returns 429 on the 6th request within 10 minutes

@@ -31,7 +31,7 @@ portrait: {
 
 ## Speaking topics (`topics.ts`)
 
-Each topic needs `id` (used as the `/speaking#id` anchor), `title`, `short`, `audience`, and `takeaway`. The home page and `/speaking` show topics in the order they appear in this list. To remove a proposed concept Marc rejected, delete its entry.
+Each topic needs `id` (used as its anchor, e.g. `/#leadership`), `title`, `short`, `audience`, and `takeaway`. The Speaking section shows topics in the order they appear in this list. To remove a proposed concept Marc rejected, delete its entry.
 
 ## Media and testimonials (`media.ts`)
 
@@ -39,7 +39,7 @@ Add up to three media items with a real URL, a date, and an approved local thumb
 
 ## Speaker reel and speaker sheet (`topics.ts`)
 
-- `speakerReel`: `{ url, title, transcriptUrl? }`. The block appears on `/speaking` once this is set.
+- `speakerReel`: `{ url, title, transcriptUrl? }`. A "Watch the speaker reel" button appears in the Speaking section once this is set.
 - `speakerSheet`: put the PDF in `public/`, then set `{ href: "/marc-rodriguez-speaker-sheet.pdf", label: "Download speaker sheet" }`.
 
 ## Ventures (`ventures.ts`)

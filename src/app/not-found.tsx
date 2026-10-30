@@ -7,10 +7,10 @@ export const metadata = {
 };
 
 const links = [
-  { href: "/about", label: "About Marc", text: "His background and story" },
-  { href: "/speaking", label: "Speaking", text: "Topics and how to book" },
+  { href: "/#about", label: "About Marc", text: "His background and story" },
+  { href: "/#speaking", label: "Speaking", text: "Topics and how to book" },
   { href: "/#manifest", label: "Manifest", text: "The Institute and Manifest Dallas" },
-  { href: "/contact", label: "Contact", text: "Send an inquiry" },
+  { href: "/#contact", label: "Contact", text: "Send an inquiry" },
 ];
 
 export default function NotFound() {

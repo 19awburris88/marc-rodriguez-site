@@ -44,7 +44,7 @@ export function Footer() {
           <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-bronze uppercase">Connect</h2>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link href="/contact" className="hover:text-marble">
+              <Link href="/#contact" className="hover:text-marble">
                 Contact
               </Link>
             </li>

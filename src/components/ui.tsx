@@ -28,7 +28,7 @@ export const buttonStyles = {
   solidDark: `${buttonBase} bg-iron text-marble hover:bg-charcoal`,
 };
 
-/** The sitewide primary CTA. Opens /contact with Speaking preselected. */
+/** The sitewide primary CTA. Jumps to the contact form with Speaking preselected. */
 export function SpeakingCta({
   location,
   className = buttonStyles.primary,

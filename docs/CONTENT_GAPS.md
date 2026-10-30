@@ -13,7 +13,7 @@ Last updated: 2026-10-30. Owners: **Marc** (approvals, content, photos) and **Au
 | Full bio, 250–400 words (client interview) | Marc | No, but strongly recommended | Chapter drafts with bracketed gaps | `content/biography.ts` → `chapters` |
 | Leadership philosophy in Marc's own words | Marc | No | "Pending client interview" block, preview only | `content/biography.ts` → `philosophy` |
 | Confirm speaking topics: titles, descriptions, audiences | Marc | **Yes** (needs at least one) | 3 *proposed* concepts, labeled | `content/topics.ts` |
-| Speaking formats, availability, travel preferences | Marc | No | Not shown anywhere | Add to `/speaking` once confirmed |
+| Speaking formats, availability, travel preferences | Marc | No | Not shown anywhere | Add to the Speaking section once confirmed |
 | Speaking intro/positioning copy | Marc | No | Draft, labeled | `content/topics.ts` → `speakingIntro` |
 | Story preview paragraph | Marc | No | Draft, labeled (paraphrases the Manifest Dallas bio) | `content/biography.ts` → `storyPreview` |
 | Wording for "U.S. Marine Corps, Retired" | Marc | No | Draft, labeled | `content/person.ts` → `military` |

@@ -23,7 +23,7 @@ export default function PrivacyPage() {
             <div>
               <h2>What we collect</h2>
               <p className="mt-3">
-                When you use the <Link href="/contact" className="underline">contact form</Link>, we collect the
+                When you use the <Link href="/#contact" className="underline">contact form</Link>, we collect the
                 details you enter: your name, email address, inquiry type, and message, plus any optional details such
                 as your organization, website, event date, and location. Please don&rsquo;t include health information
                 or payment details — the form isn&rsquo;t designed for them.
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
                   </>
                 ) : (
                   <>
-                    send a request through the <Link href="/contact" className="underline">contact form</Link>.
+                    send a request through the <Link href="/#contact" className="underline">contact form</Link>.
                   </>
                 )}
               </p>
