@@ -36,9 +36,14 @@ export const ventures: Venture[] = [
     source: sources.manifestDallas,
     note: "Description summarizes the Manifest Dallas public site. Logo and image pending.",
     image: {
-      alt: "Inside the Manifest Dallas training floor",
+      src: "/images/manifest-dallas-floor.jpg",
+      width: 800,
+      height: 533,
+      alt: "The Manifest Dallas training floor: red turf, rows of red strength equipment, and a mural reading “Where Champions are Self Made”",
       needed: "Manifest Dallas facility photo (with permission)",
-      status: "draft",
+      status: "approved",
+      source: "Supplied by Austin, 2026-10-30",
+      note: "800px wide — fine for the panel, but request a larger original for high-density screens. Confirm reuse permission.",
     },
   },
 ];
