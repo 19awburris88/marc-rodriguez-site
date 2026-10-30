@@ -40,29 +40,29 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="bg-ink text-ivory">
+      <section className="bg-iron text-marble">
         <Container className="py-16 lg:py-20">
           <Eyebrow tone="dark">Contact</Eyebrow>
           <h1 className="mt-4 max-w-3xl font-display text-5xl leading-[1.05] font-light sm:text-6xl">
             Let&rsquo;s start a conversation.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-stone-soft">
             For speaking, media, podcast, and partnership inquiries. Tell Marc about your event or idea below.
           </p>
         </Container>
       </section>
 
-      <section className="on-light bg-ivory py-16 lg:py-24">
+      <section className="on-light bg-marble py-16 lg:py-24">
         <Container className="grid gap-16 lg:grid-cols-[1.6fr_1fr] lg:gap-20">
           <div>
             <h2 className="sr-only">Inquiry form</h2>
             <ContactForm fallback={fallback} />
           </div>
 
-          <aside className="space-y-10 lg:border-l lg:border-divider lg:pl-12">
+          <aside className="space-y-10 lg:border-l lg:border-travertine lg:pl-12">
             <div>
               <h2 className="font-display text-2xl">Looking for training or education?</h2>
-              <p className="mt-3 text-stone">
+              <p className="mt-3 text-steel">
                 Course, enrollment, trainer, and facility questions are handled directly by each business.
               </p>
               <ul className="mt-6 space-y-4">
@@ -71,12 +71,12 @@ export default function ContactPage() {
                     <TrackedLink
                       external
                       href={withUtm(v.url, "contact_sidebar")}
-                      className="group flex items-start justify-between gap-4 border border-divider bg-white/50 p-4 hover:border-ink"
+                      className="group flex items-start justify-between gap-4 border border-travertine bg-white/50 p-4 hover:border-iron"
                       event={{ name: "business_referral", props: { venture: v.id, location: "contact_sidebar" } }}
                     >
                       <span>
                         <span className="block font-semibold">{v.name}</span>
-                        <span className="text-sm text-stone">{new URL(v.url).hostname.replace(/^www\./, "")}</span>
+                        <span className="text-sm text-steel">{new URL(v.url).hostname.replace(/^www\./, "")}</span>
                       </span>
                       <ExternalIcon className="mt-1 shrink-0" />
                       <NewTab />
@@ -88,10 +88,10 @@ export default function ContactPage() {
 
             <div>
               <h2 className="font-display text-2xl">Elsewhere</h2>
-              <ul className="mt-4 space-y-2 text-stone">
+              <ul className="mt-4 space-y-2 text-steel">
                 {email && (
                   <li>
-                    <a href={`mailto:${email.address}`} className="underline underline-offset-4 hover:text-ink">
+                    <a href={`mailto:${email.address}`} className="underline underline-offset-4 hover:text-iron">
                       {email.address}
                     </a>
                   </li>
@@ -101,14 +101,14 @@ export default function ContactPage() {
                     href={instagram.url}
                     target="_blank"
                     rel="noopener noreferrer me"
-                    className="underline underline-offset-4 hover:text-ink"
+                    className="underline underline-offset-4 hover:text-iron"
                   >
                     Instagram {instagram.handle}
                     <NewTab />
                   </a>
                 </li>
               </ul>
-              <p className="mt-6 text-sm text-stone">
+              <p className="mt-6 text-sm text-steel">
                 How inquiries are handled: see the{" "}
                 <Link href="/privacy" className="underline underline-offset-4">
                   privacy notice

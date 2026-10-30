@@ -5,7 +5,8 @@
 ## Content (see CONTENT_GAPS.md)
 
 - [ ] Marc approves the hero copy, short bio, and at least one speaking topic
-- [ ] Approved primary portrait added, plus speaking and candid photos
+- [x] Approved primary portrait added
+- [ ] Speaking and candid photos
 - [ ] Full bio from the client interview
 - [ ] Proposed topics confirmed, replaced, or removed
 - [ ] Privacy notice reviewed: host, privacy contact, analytics
@@ -44,7 +45,7 @@
 - [ ] Lighthouse on mobile, with real photos: LCP ≤ 2.5s, CLS ≤ 0.1. Record lab results separately from field data.
 - [ ] Keyboard-only walkthrough of every page
 - [ ] Screen reader pass (VoiceOver) on the home page and contact form
-- [ ] Recheck contrast if any colors change. Current pairs: ink/ivory 16.7, bronze/ink 7.0, muted/ink 9.3, bronze-deep/ivory 6.0, stone/ivory 6.1.
+- [ ] Recheck contrast if any colors change. Current pairs (Manifest palette): iron/marble 18.5, marble on red 5.7, red/marble 5.7, stone-soft/iron 9.9, bronze/iron 5.3, steel/marble 10.1. Never use red text on iron or Stone Gray text on marble.
 - [ ] Production metadata uses the real domain (canonical URLs, sitemap, Open Graph, Person JSON-LD)
 - [ ] Swap the text-only social card for a portrait version
 - [ ] Remove `.env.local` test settings from any shared environment

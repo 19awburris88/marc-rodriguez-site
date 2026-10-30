@@ -73,7 +73,7 @@ export function composeEmail(inquiry: InquiryInput) {
   )
     .map(
       ([k, v]) =>
-        `<tr><td style="color:#5c5a55;vertical-align:top">${escapeHtml(k)}</td><td>${escapeHtml(v)}</td></tr>`,
+        `<tr><td style="color:#403c3a;vertical-align:top">${escapeHtml(k)}</td><td>${escapeHtml(v)}</td></tr>`,
     )
     .join(
       "",

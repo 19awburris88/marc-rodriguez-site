@@ -1,28 +1,67 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Proposed palette from the brief — not an official Manifest
- * brand standard. Contrast (WCAG): ink/ivory 16.7, bronze/ink 7.0,
- * muted/ink 9.3, bronze-deep/ivory 6.0, stone/ivory 6.1.
- * Never use --color-bronze for text on ivory (2.4:1).
+ * Manifest brand palette.
+ * WCAG contrast of the pairs we use:
+ *   iron/marble 18.5 · marble/red 5.7 (buttons) · red/marble 5.7 (accent text on light)
+ *   stone-soft/iron 9.9 · stone-soft/charcoal 8.6 · bronze/iron 5.3 (small accent text on dark)
+ *   steel/marble 10.1 · steel/limestone 8.9 (supporting text on light)
+ * Avoid: red text on iron (3.3, large text only), stone on marble (3.4, decorative only).
  */
 @theme {
-  --color-ink: #111111;
-  --color-ink-soft: #1a1a1a;
-  --color-ivory: #f4f1ea;
-  --color-ivory-deep: #eae5da;
-  --color-bronze: #b89a63;
-  --color-bronze-deep: #6e5830;
-  --color-muted: #b8b6b0;
-  --color-stone: #5c5a55;
-  --color-divider: #d8d2c7;
+  --color-red: #c2181d;
+  --color-red-deep: #a0141a;
+  --color-iron: #0b0907;
+  --color-charcoal: #1c1a18;
+  --color-steel: #403c3a;
+  --color-marble: #f8f6f5;
+  --color-limestone: #ede7df;
+  --color-travertine: #dbcfc4;
+  --color-stone: #8d8481;
+  --color-stone-soft: #bdb5b3;
+  --color-pewter: #888583;
+  --color-bronze: #ac7957;
 
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Critically damped feel: fast start, no overshoot. */
+  --ease-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /*
+   * Iron behind everything so the translucent header reads as dark glass at the
+   * top of every page and in overscroll. Each section paints its own background.
+   */
+  body {
+    background: var(--color-iron);
+    color: var(--color-iron);
+    font-family: var(--font-sans);
+  }
+
+  /* Tracking is size-specific: tighten display type, leave body near 0. */
+  .font-display {
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+  :is(h1, h2).font-display {
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  /* Anchored sections clear the sticky header. */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,30 +70,35 @@ html {
   }
 }
 
-body {
-  background: var(--color-ivory);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
+/*
+ * Translucent chrome: a heavy dark material that content scrolls beneath.
+ * A faint bright top edge reads as light catching the surface.
+ */
+.material-dark {
+  background: rgb(11 9 7 / 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.06);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-bronze);
-  outline-offset: 3px;
+@media (prefers-reduced-transparency: reduce) {
+  .material-dark {
+    background: var(--color-iron);
+    backdrop-filter: none;
+  }
 }
 
-.on-light :focus-visible {
-  outline-color: var(--color-bronze-deep);
-}
-
-/* Anchored sections clear the sticky header. */
-[id] {
-  scroll-margin-top: 6rem;
+@media (prefers-contrast: more) {
+  .material-dark {
+    background: var(--color-iron);
+    backdrop-filter: none;
+    box-shadow: inset 0 -1px 0 var(--color-stone-soft);
+  }
 }
 
 /* Gentle entrance, only when motion is welcome. Content is visible without it. */
 @media (prefers-reduced-motion: no-preference) {
   .rise {
-    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: rise 700ms var(--ease-settle) both;
   }
   .rise-delay-1 {
     animation-delay: 90ms;

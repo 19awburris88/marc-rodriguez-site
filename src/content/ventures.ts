@@ -14,9 +14,14 @@ export const ventures: Venture[] = [
     source: `${sources.institute}; ${sources.instituteAbout}`,
     note: "Description summarizes the Institute's public site. Logo and image pending.",
     image: {
-      alt: "Students at Manifest Fitness Institute",
+      src: "/images/mfi-teaching.jpg",
+      width: 2048,
+      height: 1365,
+      alt: "Marc Rodriguez teaching a class at Manifest Fitness Institute, beneath the words “Why Manifest is different”",
       needed: "Institute classroom or coaching photo (with permission)",
-      status: "draft",
+      status: "approved",
+      source: "Supplied by Austin, 2026-10-30 (Institute marketing graphic, cropped to remove the URL, MFI logo, and tagline)",
+      note: "Same person as the approved portrait. Confirm reuse permission with the Institute.",
     },
   },
   {

@@ -17,6 +17,8 @@ const nav = [
 export function Header({ name }: { name: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [panelTop, setPanelTop] = useState(72);
+  const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -59,66 +61,84 @@ export function Header({ name }: { name: string }) {
     };
   }, [open]);
 
+  const toggle = () => {
+    // Anchor the panel to the header's current bottom edge (the preview banner may sit above it).
+    if (!open && headerRef.current) setPanelTop(headerRef.current.getBoundingClientRect().bottom);
+    setOpen((v) => !v);
+  };
+
   const isActive = (href: string) => !href.includes("#") && pathname === href;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink text-ivory">
-      <a
-        href="#main"
-        className="sr-only z-50 bg-bronze px-4 py-2 font-semibold text-ink focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
-      >
-        Skip to content
-      </a>
-      <Container className="flex h-[72px] items-center justify-between gap-6">
-        <Link href="/" className="font-display text-xl tracking-tight sm:text-2xl" onClick={() => setOpen(false)}>
-          {name}
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
-          <ul className="flex items-center gap-8 font-sans text-sm">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`py-2 transition-colors hover:text-ivory ${
-                    isActive(item.href) ? "text-ivory underline decoration-bronze underline-offset-8" : "text-muted"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={speakingHref}
-            className={`${buttonStyles.primary} min-h-10 px-5`}
-            onClick={() => track({ name: "speaking_cta_click", props: { location: "header" } })}
-          >
-            Inquire About Speaking
-          </Link>
-        </nav>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
+    <>
+      <header ref={headerRef} className="material-dark sticky top-0 z-40 text-marble">
+        <a
+          href="#main"
+          className="sr-only z-50 bg-red px-4 py-2 font-semibold text-marble focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
         >
-          <svg aria-hidden viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6">
-            {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
-          </svg>
-        </button>
-      </Container>
+          Skip to content
+        </a>
+        <Container className="flex h-[72px] items-center justify-between gap-6">
+          <Link href="/" className="font-display text-xl sm:text-2xl" onClick={() => setOpen(false)}>
+            {name}
+          </Link>
 
+          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
+            <ul className="flex items-center gap-8 font-sans text-sm">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`py-2 transition-colors duration-150 hover:text-marble ${
+                      isActive(item.href)
+                        ? "text-marble underline decoration-red decoration-2 underline-offset-8"
+                        : "text-stone-soft"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={speakingHref}
+              className={`${buttonStyles.primary} min-h-10 px-5`}
+              onClick={() => track({ name: "speaking_cta_click", props: { location: "header" } })}
+            >
+              Inquire About Speaking
+            </Link>
+          </nav>
+
+          <button
+            ref={toggleRef}
+            type="button"
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center transition-transform duration-100 active:scale-90 lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={toggle}
+          >
+            <svg aria-hidden viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6">
+              {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
+            </svg>
+          </button>
+        </Container>
+      </header>
+
+      {/*
+        Sibling of the header (not a child): backdrop-filter would otherwise become the
+        containing block for this fixed panel. Enters and exits along the same path —
+        down from the header, back up into it — anchored to the top edge.
+      */}
       <div
         id="mobile-menu"
         ref={panelRef}
-        hidden={!open}
-        className="fixed inset-x-0 top-[72px] bottom-0 overflow-y-auto bg-ink lg:hidden"
+        inert={!open}
+        style={{ top: panelTop }}
+        className={`fixed inset-x-0 bottom-0 z-30 origin-top overflow-y-auto bg-iron text-marble transition-[opacity,transform,visibility] duration-300 ease-settle lg:hidden motion-reduce:transform-none ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0"
+        }`}
       >
         <nav aria-label="Mobile">
           <Container className="flex flex-col py-6">
@@ -128,7 +148,7 @@ export function Header({ name }: { name: string }) {
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className="block py-5 font-display text-3xl"
+                    className="block py-5 font-display text-3xl transition-colors active:text-stone-soft"
                     onClick={() => setOpen(false)}
                   >
                     {item.label}
@@ -149,6 +169,6 @@ export function Header({ name }: { name: string }) {
           </Container>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

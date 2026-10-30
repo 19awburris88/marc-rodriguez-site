@@ -43,12 +43,13 @@ Save files under `public/images/`. Set `src`, `width`, `height`, and `status: "a
 
 | Asset | Needed for | Status | Permission / source | Record |
 | --- | --- | --- | --- | --- |
-| Primary portrait of Marc | Home hero, About hero | **Missing — blocks launch** | Request originals. The Institute About page has a portrait labeled as Marc that's a *candidate* only. | `person.portrait` |
+| Primary portrait of Marc | About hero; home story section until a candid photo arrives | **Added 2026-10-30** (`public/images/marc-portrait.jpg`) | Supplied by Austin. The filename suggests it came from the Institute site, so confirm publishing rights. | `person.portrait` |
 | Candid: Marc teaching, working, or leading | Home story preview | Missing | — | `person.candid` |
 | Marc speaking / on stage | Speaking hero | Missing | — | `person.speakingPhoto` |
 | 1–3 more supporting photos | About page, future use | Missing | — | — |
 | Manifest Fitness Institute logo | Ventures panel | Missing (name shown as text) | Needs reuse permission | `ventures[institute].logo` |
-| Institute photo | Ventures panel | Missing | Needs reuse permission | `ventures[institute].image` |
+| Institute photo | Ventures panel | **Added 2026-10-30** (`public/images/mfi-teaching.jpg`), cropped from an Institute marketing graphic to remove the URL, logo, and tagline | Supplied by Austin. Confirm reuse permission with the Institute. | `ventures[institute].image` |
+| Hero background video | Home hero | **Added 2026-10-30**: YouTube `2deAiHLGVps`, starting at 0:09, poster at `public/images/hero-poster.jpg` | Supplied by Austin. Uploaded by a third-party channel (Austin Kent), so confirm Marc is comfortable featuring it and the uploader has given permission. Recommended: re-host it on Marc's channel or as a self-hosted MP4. | `person.heroVideo` |
 | Manifest Dallas logo | Ventures panel | Missing (name shown as text) | Needs reuse permission | `ventures[dallas].logo` |
 | Manifest Dallas facility photo | Ventures panel | Missing | Needs reuse permission | `ventures[dallas].image` |
 | Media thumbnails | Selected media | n/a until media is supplied | — | `media[].thumbnail` |

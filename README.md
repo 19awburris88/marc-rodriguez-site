@@ -9,7 +9,7 @@ The full product brief is in [docs/BRIEF.md](docs/BRIEF.md).
 ## Stack
 
 - **Next.js 16** (App Router, Cache Components, Turbopack) with React 19 and TypeScript
-- **Tailwind CSS v4**, with design tokens defined in `src/app/globals.css`
+- **Tailwind CSS v4**. The design tokens in `src/app/globals.css` use the Manifest brand palette (Manifest Red, Iron, Marble, Steel, Stone Gray, Limestone, Travertine, Bronze, Pewter), with contrast ratios noted alongside them.
 - **Fraunces** for headings and **Inter** for body text, both self-hosted through `next/font`
 - No database, CMS, or login. Content is kept in typed files under `src/content/`.
 - The contact form posts to a server route (`/api/contact`). That route emails each inquiry through Resend's REST API, using `fetch` rather than an SDK.
@@ -78,6 +78,16 @@ public/images/    approved photos and logos go here
 - Spam and abuse controls: a hidden honeypot field, a same-origin check, a cap on request size, and a per-IP rate limit (5 requests per 10 minutes).
 - The form shows success **only** after Resend accepts the message. That confirms the provider took it, not that it reached the inbox. Test mode, a missing configuration, and provider failures each get their own message, and whatever the visitor typed stays in the form.
 - In outgoing email, user input is HTML-escaped and the visitor's address is set as Reply-To.
+
+## Hero video
+
+The home hero plays a muted background video (`src/components/HeroVideo.tsx`, configured in `person.heroVideo`). How it works:
+
+- It loads from `youtube-nocookie.com` and starts at 0:09. It jumps back to 0:09 just before the end, so YouTube's end screen never appears.
+- The poster frame renders first and is the LCP image. The video fades in only once YouTube reports that it's playing.
+- A pause/play button is always available.
+- If the visitor's device asks for reduced motion or Data Saver, the video doesn't autoplay. The visitor can still press play.
+- **Known issue:** YouTube can show its own round pause icon in the middle of the player when controls are hidden. That icon can't be turned off with embed parameters. Re-hosting the clip as a self-hosted MP4 would remove it and drop the YouTube dependency.
 
 ## Analytics
 

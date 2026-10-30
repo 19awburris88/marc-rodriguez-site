@@ -122,10 +122,10 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
 
   if (outcome.kind === "sent") {
     return (
-      <div ref={resultRef} tabIndex={-1} role="status" className="border border-divider bg-white/50 p-8 outline-none">
+      <div ref={resultRef} tabIndex={-1} role="status" className="border border-travertine bg-white/50 p-8 outline-none">
         <h2 className="font-display text-3xl">Thank you, {values.name.split(" ")[0]}.</h2>
-        <p className="mt-4 text-lg leading-relaxed text-stone">
-          Your message was submitted. A reply will come to <strong className="text-ink">{values.email}</strong>.
+        <p className="mt-4 text-lg leading-relaxed text-steel">
+          Your message was submitted. A reply will come to <strong className="text-iron">{values.email}</strong>.
         </p>
       </div>
     );
@@ -137,11 +137,11 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
         ref={resultRef}
         tabIndex={-1}
         role="status"
-        className="border border-dashed border-bronze-deep bg-ivory-deep p-8 outline-none"
+        className="border border-dashed border-red bg-limestone p-8 outline-none"
       >
-        <p className="text-xs font-semibold tracking-[0.16em] text-bronze-deep uppercase">Preview mode</p>
+        <p className="text-xs font-semibold tracking-[0.16em] text-red uppercase">Preview mode</p>
         <h2 className="mt-2 font-display text-3xl">Your message was not sent.</h2>
-        <p className="mt-4 leading-relaxed text-stone">
+        <p className="mt-4 leading-relaxed text-steel">
           The form passed validation and was logged on the development server, but no email delivery is configured
           (<code>CONTACT_DELIVERY=test</code>). See the README to connect a real inbox.
         </p>
@@ -160,8 +160,8 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
     onChange: set(field),
     "aria-invalid": errors[field] ? true : undefined,
     "aria-describedby": errors[field] ? `${id}-${field}-error` : undefined,
-    className: `mt-2 block w-full border bg-white px-4 py-3 text-base text-ink placeholder:text-stone/70 focus:outline-2 focus:outline-offset-0 focus:outline-bronze-deep ${
-      errors[field] ? "border-[#9b2c1f]" : "border-divider"
+    className: `mt-2 block w-full border bg-white px-4 py-3 text-base text-iron placeholder:text-steel/70 focus:outline-2 focus:outline-offset-0 focus:outline-red ${
+      errors[field] ? "border-[#9b2c1f]" : "border-travertine"
     }`,
   });
 
@@ -204,10 +204,10 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
           {inquiryTypes.map((t) => (
             <label
               key={t.value}
-              className={`flex min-h-12 cursor-pointer items-center justify-center border px-3 text-center text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-bronze-deep ${
+              className={`flex min-h-12 cursor-pointer items-center justify-center border px-3 text-center text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-red ${
                 values.type === t.value
-                  ? "border-ink bg-ink text-ivory"
-                  : `bg-white hover:border-ink ${errors.type ? "border-[#9b2c1f]" : "border-divider"}`
+                  ? "border-iron bg-iron text-marble"
+                  : `bg-white hover:border-iron ${errors.type ? "border-[#9b2c1f]" : "border-travertine"}`
               }`}
             >
               <input
@@ -250,7 +250,7 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
       </div>
 
       {isSpeaking && (
-        <div className="grid gap-6 border-l-2 border-bronze pl-5 sm:grid-cols-2">
+        <div className="grid gap-6 border-l-2 border-red pl-5 sm:grid-cols-2">
           <Field
             label="Event date"
             hint="Approximate is fine"
@@ -302,7 +302,7 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
         <button type="submit" disabled={submitting} className={`${buttonStyles.solidDark} disabled:opacity-60`}>
           {submitting ? "Sending…" : "Send inquiry"}
         </button>
-        <p className="text-xs text-stone">
+        <p className="text-xs text-steel">
           <Req /> Required. Submitting does not subscribe you to anything.
         </p>
       </div>
@@ -312,7 +312,7 @@ export function ContactForm({ fallback }: { fallback: ReactNode }) {
 
 function Req() {
   return (
-    <span aria-hidden className="text-bronze-deep">
+    <span aria-hidden className="text-red">
       *
     </span>
   );
@@ -338,10 +338,10 @@ function Field({
   return (
     <div>
       <label htmlFor={htmlFor} className="text-sm font-semibold">
-        {label} {required ? <Req /> : <span className="font-normal text-stone">(optional)</span>}
+        {label} {required ? <Req /> : <span className="font-normal text-steel">(optional)</span>}
         {required && <span className="sr-only"> (required)</span>}
       </label>
-      {hint && <p className="mt-0.5 text-xs text-stone">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-steel">{hint}</p>}
       {children}
       <FieldError id={errorId} message={error} />
     </div>

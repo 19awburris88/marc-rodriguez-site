@@ -47,14 +47,14 @@ export function Photo({
       role="img"
       aria-label={`Photo placeholder: ${image.needed}`}
       className={`relative flex items-end overflow-hidden border border-dashed ${
-        dark ? "border-bronze/40 bg-ink-soft text-muted" : "border-bronze-deep/40 bg-ivory-deep text-stone"
+        dark ? "border-bronze/40 bg-charcoal text-stone-soft" : "border-red/40 bg-limestone text-steel"
       } ${className}`}
     >
       <svg
         aria-hidden
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
-        className={`absolute inset-0 h-full w-full ${dark ? "text-bronze/10" : "text-bronze-deep/10"}`}
+        className={`absolute inset-0 h-full w-full ${dark ? "text-bronze/10" : "text-red/10"}`}
       >
         <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" strokeWidth="0.3" />
         <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" strokeWidth="0.3" />
@@ -62,7 +62,7 @@ export function Photo({
       <div className="relative p-5">
         <p
           className={`font-sans text-[11px] font-semibold tracking-[0.16em] uppercase ${
-            dark ? "text-bronze" : "text-bronze-deep"
+            dark ? "text-bronze" : "text-red"
           }`}
         >
           Photo needed

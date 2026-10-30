@@ -10,10 +10,10 @@ export function Footer() {
   const roles = visible(person.roles);
   const instagram = person.social.instagram;
   return (
-    <footer className="bg-ink text-muted">
+    <footer className="bg-iron text-stone-soft">
       <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Link href="/" className="font-display text-2xl text-ivory">
+          <Link href="/" className="font-display text-2xl text-marble">
             {person.name}
           </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed">
@@ -29,7 +29,7 @@ export function Footer() {
                 <TrackedLink
                   external
                   href={withUtm(v.url, "footer")}
-                  className="hover:text-ivory"
+                  className="hover:text-marble"
                   event={{ name: "business_referral", props: { venture: v.id, location: "footer" } }}
                 >
                   {v.name}
@@ -44,18 +44,18 @@ export function Footer() {
           <h2 className="font-sans text-xs font-semibold tracking-[0.2em] text-bronze uppercase">Connect</h2>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
-              <Link href="/contact" className="hover:text-ivory">
+              <Link href="/contact" className="hover:text-marble">
                 Contact
               </Link>
             </li>
             <li>
-              <a href={instagram.url} target="_blank" rel="noopener noreferrer me" className="hover:text-ivory">
-                Instagram <span className="text-muted/70">{instagram.handle}</span>
+              <a href={instagram.url} target="_blank" rel="noopener noreferrer me" className="hover:text-marble">
+                Instagram <span className="text-stone-soft/70">{instagram.handle}</span>
                 <NewTab />
               </a>
             </li>
             <li>
-              <Link href="/privacy" className="hover:text-ivory">
+              <Link href="/privacy" className="hover:text-marble">
                 Privacy
               </Link>
             </li>

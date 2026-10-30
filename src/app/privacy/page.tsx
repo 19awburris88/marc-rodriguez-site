@@ -12,14 +12,14 @@ export const metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <section className="on-light bg-ivory py-16 lg:py-24">
+    <section className="on-light bg-marble py-16 lg:py-24">
       <Container className="max-w-3xl">
         <Eyebrow>Privacy</Eyebrow>
         <h1 className="mt-4 font-display text-5xl leading-tight">Privacy notice</h1>
-        <p className="mt-4 text-sm text-stone">Last updated {privacy.updated}</p>
+        <p className="mt-4 text-sm text-steel">Last updated {privacy.updated}</p>
 
         <Draft item={privacy} className="mt-12">
-          <div className="mt-10 space-y-10 text-lg leading-relaxed text-stone [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-ink">
+          <div className="mt-10 space-y-10 text-lg leading-relaxed text-steel [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-iron">
             <div>
               <h2>What we collect</h2>
               <p className="mt-3">
@@ -42,6 +42,12 @@ export default function PrivacyPage() {
                 Form submissions are sent through {privacy.emailProvider}, an email delivery service. This site does
                 not store submissions in its own database. The site&rsquo;s hosting provider may keep standard server
                 logs, such as IP addresses and request times, for security and reliability.
+              </p>
+              <p className="mt-3">
+                The home page plays a muted background video embedded from YouTube in its privacy-enhanced mode
+                (youtube-nocookie.com). Loading it connects your browser to YouTube, which is owned by Google and
+                handles that connection under its own privacy policy. If your device is set to reduce motion or save
+                data, the video doesn&rsquo;t load unless you press play.
               </p>
             </div>
             <div>

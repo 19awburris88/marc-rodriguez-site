@@ -55,12 +55,39 @@ export const person = {
     note: "Draft copy from the brief. Marc to approve.",
   } as Approval & { tagline: string; headline: string[]; intro: string },
 
+  /**
+   * Full-bleed background video behind the home hero. Loads from YouTube's
+   * privacy-enhanced domain, muted, starting at `start` seconds and looping
+   * back to it. The poster is the video's own thumbnail (letterboxed — the
+   * hero crops the bars) and is what renders before playback, without JS, and
+   * for visitors who prefer reduced motion or have Data Saver on.
+   */
+  heroVideo: {
+    youtubeId: "2deAiHLGVps",
+    start: 9,
+    title: "SMTF Dallas - Video 1",
+    poster: {
+      src: "/images/hero-poster.jpg",
+      width: 1280,
+      height: 720,
+      alt: "",
+      needed: "Hero video poster frame",
+      status: "approved",
+    },
+    status: "approved",
+    source: "Supplied by Austin, 2026-10-30 — https://www.youtube.com/watch?v=2deAiHLGVps (uploaded by the Austin Kent channel)",
+    note: "Confirm Marc is comfortable featuring this footage and that the uploader has given permission. Ideally re-host the clip on Marc's own channel or as a self-hosted MP4.",
+  } as Approval & { youtubeId: string; start: number; title: string; poster: ImageAsset },
+
   portrait: {
-    src: undefined,
-    alt: "Portrait of Marc Rodriguez",
+    src: "/images/marc-portrait.jpg",
+    width: 1983,
+    height: 2000,
+    alt: "Marc Rodriguez smiling in a Manifest Fitness Institute T-shirt in front of a painted mural",
     needed: "Primary portrait of Marc — high resolution, clear face, room to crop for mobile",
-    status: "draft",
-    note: "Request originals. The Institute About page portrait is a candidate, not an approval.",
+    status: "approved",
+    source: "Supplied by Austin, 2026-10-30 (file: Marc-Rodriguez-1x1-1-scaled.jpeg)",
+    note: "Filename suggests it came from the Institute site; confirm Marc owns or has rights to publish it.",
   } as ImageAsset,
 
   candid: {

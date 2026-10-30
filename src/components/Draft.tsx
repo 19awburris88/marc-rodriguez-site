@@ -24,7 +24,7 @@ export function Draft({
   return (
     <div
       className={`relative rounded-sm outline-1 outline-offset-[6px] outline-dashed ${
-        tone === "dark" ? "outline-bronze/50" : "outline-bronze-deep/40"
+        tone === "dark" ? "outline-bronze/50" : "outline-red/40"
       } ${className}`}
     >
       <DraftLabel tone={tone} title={item.note} />
@@ -46,7 +46,7 @@ export function DraftLabel({
     <span
       title={title}
       className={`absolute -top-[18px] right-0 z-10 rounded-sm whitespace-nowrap px-1.5 py-0.5 font-sans text-[10px] font-semibold tracking-[0.12em] uppercase ${
-        tone === "dark" ? "bg-bronze text-ink" : "bg-bronze-deep text-ivory"
+        tone === "dark" ? "bg-bronze text-iron" : "bg-red text-marble"
       }`}
     >
       {text}

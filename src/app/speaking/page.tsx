@@ -18,7 +18,7 @@ export default function SpeakingPage() {
   const shownTopics = visible(topics);
   return (
     <>
-      <section className="bg-ink text-ivory">
+      <section className="bg-iron text-marble">
         <Container className="grid items-center gap-12 py-16 lg:grid-cols-[55fr_45fr] lg:gap-16 lg:py-24">
           <div>
             <Eyebrow tone="dark">Speaking</Eyebrow>
@@ -26,7 +26,7 @@ export default function SpeakingPage() {
               {speakingIntro.heading}
             </h1>
             <Draft item={speakingIntro} tone="dark" className="mt-10">
-              <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">{speakingIntro.text}</p>
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-stone-soft">{speakingIntro.text}</p>
             </Draft>
             <div className="mt-10">
               <SpeakingCta location="speaking_hero" />
@@ -43,7 +43,7 @@ export default function SpeakingPage() {
       </section>
 
       {speakerReel && (
-        <section className="on-light bg-ivory-deep py-16">
+        <section className="on-light bg-limestone py-16">
           <Container className="max-w-4xl">
             <Eyebrow>Speaker reel</Eyebrow>
             <p className="mt-4 font-display text-2xl">{speakerReel.title}</p>
@@ -61,7 +61,7 @@ export default function SpeakingPage() {
       )}
 
       {shownTopics.length > 0 && (
-        <section className="on-light bg-ivory py-20 lg:py-28">
+        <section className="on-light bg-marble py-20 lg:py-28">
           <Container>
             <h2 className="font-display text-4xl leading-tight sm:text-5xl">Topics</h2>
             <div className="mt-14 space-y-6">
@@ -69,23 +69,23 @@ export default function SpeakingPage() {
                 <article
                   key={t.id}
                   id={t.id}
-                  className="grid gap-6 border-t border-divider pt-10 lg:grid-cols-[5rem_1.2fr_1fr] lg:gap-10"
+                  className="grid gap-6 border-t border-travertine pt-10 lg:grid-cols-[5rem_1.2fr_1fr] lg:gap-10"
                 >
-                  <span className="font-display text-4xl text-bronze-deep">0{i + 1}</span>
+                  <span className="font-display text-4xl text-red">0{i + 1}</span>
                   <Draft item={t} className="lg:col-span-2">
                     <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10">
                       <div>
                         <h3 className="font-display text-3xl">{t.title}</h3>
-                        <p className="mt-3 text-lg leading-relaxed text-stone">{t.short}</p>
+                        <p className="mt-3 text-lg leading-relaxed text-steel">{t.short}</p>
                       </div>
                       <dl className="space-y-4 text-sm">
                         <div>
-                          <dt className="font-semibold tracking-[0.14em] text-bronze-deep uppercase">For</dt>
-                          <dd className="mt-1 text-base text-ink">{t.audience}</dd>
+                          <dt className="font-semibold tracking-[0.14em] text-red uppercase">For</dt>
+                          <dd className="mt-1 text-base text-iron">{t.audience}</dd>
                         </div>
                         <div>
-                          <dt className="font-semibold tracking-[0.14em] text-bronze-deep uppercase">Takeaway</dt>
-                          <dd className="mt-1 text-base text-ink">{t.takeaway}</dd>
+                          <dt className="font-semibold tracking-[0.14em] text-red uppercase">Takeaway</dt>
+                          <dd className="mt-1 text-base text-iron">{t.takeaway}</dd>
                         </div>
                       </dl>
                     </div>
@@ -98,7 +98,7 @@ export default function SpeakingPage() {
       )}
 
       {canShow(shortBio) && (
-        <section className="on-light bg-ivory-deep py-20">
+        <section className="on-light bg-limestone py-20">
           <Container className="grid gap-10 lg:grid-cols-[1fr_2fr]">
             <div>
               <Eyebrow>For organizers</Eyebrow>
@@ -118,10 +118,10 @@ export default function SpeakingPage() {
         </section>
       )}
 
-      <section className="bg-ink-soft py-20 text-ivory">
+      <section className="bg-charcoal py-20 text-marble">
         <Container className="max-w-3xl text-center">
           <h2 className="font-display text-4xl leading-tight sm:text-5xl">Planning an event?</h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-muted">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-stone-soft">
             Share your date, audience, and goals to start the conversation about fit and availability.
           </p>
           <div className="mt-10">

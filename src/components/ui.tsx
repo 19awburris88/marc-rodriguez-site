@@ -10,7 +10,7 @@ export function Eyebrow({ children, tone = "light" }: { children: ReactNode; ton
   return (
     <p
       className={`font-sans text-xs font-semibold tracking-[0.2em] uppercase ${
-        tone === "dark" ? "text-bronze" : "text-bronze-deep"
+        tone === "dark" ? "text-bronze" : "text-red"
       }`}
     >
       {children}
@@ -19,13 +19,13 @@ export function Eyebrow({ children, tone = "light" }: { children: ReactNode; ton
 }
 
 const buttonBase =
-  "inline-flex min-h-12 items-center justify-center gap-2 px-6 font-sans text-sm font-semibold tracking-wide transition-colors duration-200";
+  "inline-flex min-h-12 items-center justify-center gap-2 px-6 font-sans text-sm font-semibold tracking-wide transition-[background-color,border-color,color,transform] duration-150 ease-out active:scale-[0.97] active:duration-100";
 
 export const buttonStyles = {
-  primary: `${buttonBase} bg-bronze text-ink hover:bg-[#c9ad79]`,
-  outlineDark: `${buttonBase} border border-muted/40 text-ivory hover:border-ivory`,
-  outlineLight: `${buttonBase} border border-ink/25 text-ink hover:border-ink`,
-  solidDark: `${buttonBase} bg-ink text-ivory hover:bg-ink-soft`,
+  primary: `${buttonBase} bg-red text-marble hover:bg-red-deep`,
+  outlineDark: `${buttonBase} border border-stone-soft/40 text-marble hover:border-marble`,
+  outlineLight: `${buttonBase} border border-iron/25 text-iron hover:border-iron`,
+  solidDark: `${buttonBase} bg-iron text-marble hover:bg-charcoal`,
 };
 
 /** The sitewide primary CTA. Opens /contact with Speaking preselected. */

@@ -16,18 +16,18 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "flex-end",
           padding: "72px 80px",
-          background: "#111111",
-          color: "#F4F1EA",
+          background: "#0B0907",
+          color: "#F8F6F5",
           fontFamily: "Georgia, serif",
         }}
       >
-        <div style={{ width: 72, height: 4, background: "#B89A63", marginBottom: 36 }} />
+        <div style={{ width: 72, height: 4, background: "#C2181D", marginBottom: 36 }} />
         <div style={{ fontSize: 104, lineHeight: 1, letterSpacing: -2 }}>Marc Rodriguez</div>
         <div
           style={{
             marginTop: 28,
             fontSize: 28,
-            color: "#B89A63",
+            color: "#C2181D",
             letterSpacing: 6,
             textTransform: "uppercase",
             fontFamily: "sans-serif",
